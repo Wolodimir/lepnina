@@ -12,20 +12,22 @@ public class Client {
     private String name;
     private String phoneNumber;
     private String email;
-    private Boolean isActive = true;
+    private Boolean isActive;
 
 
-    public Client(String name, String phoneNumber, String email) {
+    public Client(String name, String phoneNumber, String email, Boolean isActive) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.isActive = isActive;
     }
 
-    public Client(Long id, String name, String phoneNumber, String email) {
+    public Client(Long id, String name, String phoneNumber, String email, Boolean isActive) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.isActive = isActive;
     }
 
     public Client() {
