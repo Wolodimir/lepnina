@@ -15,7 +15,7 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/api/clients")
+    @GetMapping("/api/clients/allClients")
     public List<Client> allClients(){
         return clientService.getClients();
     }
@@ -23,5 +23,10 @@ public class ClientController {
     @PostMapping("/api/clients/addNewClient")
     public void addNewClient(@RequestBody Client client){
         clientService.addNewClient(client);
+    }
+
+   @GetMapping("/api/clients/activeClients")
+    public List<Client> activeClients(){
+        return clientService.getActiveClients();
     }
 }

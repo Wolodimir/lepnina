@@ -18,6 +18,10 @@ public class ClientService {
         return clientRepo.findAll();
     }
 
+    public List<Client> getActiveClients(){
+        return clientRepo.findByIsActiveEquals(true);
+    }
+
     public void addNewClient(Client client){
         Optional<Client> clientOptional = clientRepo.findByPhoneNumber(client.getPhoneNumber());
         if(clientOptional.isPresent()){

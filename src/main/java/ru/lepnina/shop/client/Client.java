@@ -12,14 +12,13 @@ public class Client {
     private String name;
     private String phoneNumber;
     private String email;
-    private Boolean isActive;
+    private Boolean isActive = true;
 
 
     public Client(String name, String phoneNumber, String email) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.isActive = true;
     }
 
     public Client(Long id, String name, String phoneNumber, String email) {
@@ -27,7 +26,6 @@ public class Client {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
-        this.isActive = true;
     }
 
     public Client() {
