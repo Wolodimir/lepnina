@@ -1,7 +1,14 @@
 package ru.lepnina.shop.product;
 
+import com.amazonaws.services.apigateway.model.Op;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.lepnina.shop.amazon.AmazonClient;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -14,5 +21,38 @@ public class ProductService {
         this.amazonClient = amazonClient;
     }
 
+    public void saveProduct(String description,
+                            String name,
+                            Long price,
+                            MultipartFile imageFile,
+                            String category
+                            ) throws IOException {
+        Product p = new Product();
+        p.setPrice(price);
+        p.setName(name);
+        p.setCategory(category);
+        p.setDescription(description);
+        p.setImageUrl(amazonClient.uploadFile(imageFile));
+        productRepo.save(p);
+    }
 
+
+    public List<Product> getProducts() {
+        return productRepo.findAll();
+    }
+
+    public void deleteProduct(Long id){
+        boolean exists = productRepo.existsById(id);
+        if(!exists){
+            throw new IllegalStateException("Product with id " + id + " does not exists");
+        }
+        Optional<Product> product = productRepo.findById(id);
+        ArrayList<Product> p = new ArrayList<>();
+        product.ifPresent(p::add);
+        Product product1 = p.get(p.size()-1);
+
+        amazonClient.deleteFileFromS3Bucket(product1.getImageUrl());
+
+        productRepo.deleteById(id);
+    }
 }

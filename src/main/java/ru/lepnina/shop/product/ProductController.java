@@ -19,20 +19,19 @@ public class ProductController {
     }
 
 
-    @PostMapping("/uploadImage")
-    public void uploadImage(
+    @PostMapping("/addProduct")
+    public void uploadProduct(
             @RequestParam String description,
             @RequestParam String name,
             @RequestParam Long price,
             @RequestParam MultipartFile imageFile,
             @RequestParam String category
     ) throws IOException {
-          Product p = new Product();
-          p.setPrice(price);
-          p.setName(name);
-          p.setCategory(category);
-          p.setDescription(description);
-          p.setImageUrl(amazonClient.uploadFile(imageFile));
-          System.out.println(p.toString());
+        productService.saveProduct(description, name, price, imageFile, category);
+    }
+
+    @DeleteMapping("/deleteProduct/{id}")
+    public void deleteProduct(@PathVariable(value = "id") Long id){
+        productService.deleteProduct(id);
     }
 }
