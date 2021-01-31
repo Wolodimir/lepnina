@@ -1,5 +1,7 @@
 package ru.lepnina.shop.product;
 
+import ru.lepnina.shop.cart.Cart;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,33 +11,38 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "text")
     private String description;
 
-    private Double price;
+    private String name;
+
+    private Long price;
+
     private String imageUrl;
 
-    public byte[] getImage() {
-        return image;
-    }
+    private String category;
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
-    private byte[] image;
-
-    public Product(String description, Double price, String imageUrl) {
+    public Product(String description, String name, Long price, String imageUrl, String category, Cart cart) {
         this.description = description;
+        this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.category = category;
+        this.cart = cart;
     }
 
-    public Product(Long id, String description, Double price, String imageUrl) {
+    public Product(Long id, String description, String name, Long price, String imageUrl, String category, Cart cart) {
         this.id = id;
         this.description = description;
+        this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
+        this.category = category;
+        this.cart = cart;
     }
 
     public Product() {
@@ -57,11 +64,19 @@ public class Product {
         this.description = description;
     }
 
-    public Double getPrice() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -71,5 +86,21 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

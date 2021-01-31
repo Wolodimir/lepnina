@@ -11,5 +11,5 @@ public interface ClientRepo extends JpaRepository<Client, Long> {
     //SELECT * FROM client
     Optional<Client> findByPhoneNumber(String PhoneNumber);
 
-    List<Client> findByIsActiveEquals(Boolean active);
+    List<Client> findByActiveEquals(Boolean active);
 }

@@ -1,0 +1,10 @@
+amazonProperties:
+   endpointUrl: https://s3.eu-north-1.amazonaws.com
+   accessKey: AKIAWTZBII3P2C652JO4
+   secretKey: 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
+   bucketName: lepninatest
+spring:
+ servlet:
+  multipart:
+   max-file-size: 100MB
+   max-request-size: 100MB

@@ -19,7 +19,7 @@ public class ClientService {
     }
 
     public List<Client> getActiveClients(){
-        return clientRepo.findByIsActiveEquals(true);
+        return clientRepo.findByActiveEquals(true);
     }
 
     public void addNewClient(Client client){

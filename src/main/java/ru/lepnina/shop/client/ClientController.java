@@ -1,13 +1,11 @@
 package ru.lepnina.shop.client;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequestMapping("/api/clients")
 public class ClientController {
     private final ClientService clientService;
 
@@ -15,17 +13,17 @@ public class ClientController {
         this.clientService = clientService;
     }
 
-    @GetMapping("/api/clients/allClients")
+    @GetMapping("/allClients")
     public List<Client> allClients(){
         return clientService.getClients();
     }
 
-    @PostMapping("/api/clients/addNewClient")
+    @PostMapping("/addNewClient")
     public void addNewClient(@RequestBody Client client){
         clientService.addNewClient(client);
     }
 
-   @GetMapping("/api/clients/activeClients")
+   @GetMapping("/activeClients")
     public List<Client> activeClients(){
         return clientService.getActiveClients();
     }
