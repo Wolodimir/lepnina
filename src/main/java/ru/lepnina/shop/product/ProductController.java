@@ -2,9 +2,9 @@ package ru.lepnina.shop.product;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.lepnina.shop.amazon.AmazonClient;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
@@ -12,10 +12,13 @@ import java.io.IOException;
 public class ProductController {
 
     private final ProductService productService;
-    private final AmazonClient amazonClient;
-    public ProductController(ProductService productService, AmazonClient amazonClient) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.amazonClient = amazonClient;
+    }
+
+    @GetMapping("/allProducts")
+    public List<Product> getAllProducts(){
+        return productService.getProducts();
     }
 
 

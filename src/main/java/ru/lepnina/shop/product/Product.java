@@ -22,27 +22,25 @@ public class Product {
 
     private String category;
 
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name = "cart_id")
-    private Cart cart;
+    private Cart cart;*/
 
-    public Product(String description, String name, Long price, String imageUrl, String category, Cart cart) {
+    public Product(String description, String name, Long price, String imageUrl, String category) {
         this.description = description;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
-        this.cart = cart;
     }
 
-    public Product(Long id, String description, String name, Long price, String imageUrl, String category, Cart cart) {
+    public Product(Long id, String description, String name, Long price, String imageUrl, String category) {
         this.id = id;
         this.description = description;
         this.name = name;
         this.price = price;
         this.imageUrl = imageUrl;
         this.category = category;
-        this.cart = cart;
     }
 
     public Product() {
@@ -96,11 +94,4 @@ public class Product {
         this.category = category;
     }
 
-    public Cart getCart() {
-        return cart;
-    }
-
-    public void setCart(Cart cart) {
-        this.cart = cart;
-    }
 }

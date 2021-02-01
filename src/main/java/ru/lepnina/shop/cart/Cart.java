@@ -1,4 +1,5 @@
 package ru.lepnina.shop.cart;
+/*
 
 import ru.lepnina.shop.client.Client;
 import ru.lepnina.shop.product.Product;
@@ -13,7 +14,15 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany(mappedBy = "cart")
+    @OneToMany
+    @JoinTable(
+            name = "product",
+            joinColumns =
+    )
+
+
+    @OneToMany(mappedBy = "product")
+    @JoinColumn(name = "product_id")
     private Set<Product> products;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -57,4 +66,4 @@ public class Cart {
     public void setClient(Client client) {
         this.client = client;
     }
-}
+}*/
