@@ -1,6 +1,5 @@
 package ru.lepnina.shop.product;
 
-import ru.lepnina.shop.cart.Cart;
 
 import javax.persistence.*;
 
@@ -22,9 +21,6 @@ public class Product {
 
     private String category;
 
-    /*@ManyToOne
-    @JoinColumn(name = "cart_id")
-    private Cart cart;*/
 
     public Product(String description, String name, Long price, String imageUrl, String category) {
         this.description = description;
