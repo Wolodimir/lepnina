@@ -43,14 +43,12 @@ public class AdminController {
     }
 
     /*
-    *
     * Product control section
     * */
 
     @GetMapping("/allProducts")
     public List<Product> getAllProducts(){
         return productService.getProducts();
-
     }
 
     @PostMapping("/addProduct")
@@ -68,5 +66,9 @@ public class AdminController {
     public void deleteProduct(@PathVariable(value = "id") Long id){
         productService.deleteProduct(id);
     }
+
+    /*
+    *
+    * */
 
 }
