@@ -18,6 +18,10 @@ public class ClientService {
         return clientRepo.findAll();
     }
 
+    public Client getOneClient(Long id){
+        return clientRepo.findById(id).orElse(new Client());
+    }
+
     public List<Client> getActiveClients(){
         return clientRepo.findByActiveEquals(true);
     }

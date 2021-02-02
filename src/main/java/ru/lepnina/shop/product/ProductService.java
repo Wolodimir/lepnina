@@ -1,6 +1,5 @@
 package ru.lepnina.shop.product;
 
-import com.amazonaws.services.apigateway.model.Op;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.lepnina.shop.amazon.AmazonClient;
@@ -34,6 +33,9 @@ public class ProductService {
         p.setDescription(description);
         p.setImageUrl(amazonClient.uploadFile(imageFile));
         productRepo.save(p);
+    }
+    public Optional<Product> getProduct(Long id){
+        return productRepo.findById(id);
     }
 
 
