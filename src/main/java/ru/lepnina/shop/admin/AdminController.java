@@ -55,11 +55,11 @@ public class AdminController {
     public void uploadProduct(
             @RequestParam String description,
             @RequestParam String name,
-            @RequestParam Long price,
+            @RequestParam String price,
             @RequestParam MultipartFile imageFile,
             @RequestParam String category
     ) throws IOException {
-        productService.saveProduct(description, name, price, imageFile, category);
+        productService.saveProduct(description, name, Long.parseLong(price), imageFile, category);
     }
 
     @DeleteMapping("/deleteProduct/{id}")
