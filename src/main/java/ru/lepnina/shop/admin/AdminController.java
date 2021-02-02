@@ -46,11 +46,6 @@ public class AdminController {
     * Product control section
     * */
 
-    @GetMapping("/allProducts")
-    public List<Product> getAllProducts(){
-        return productService.getProducts();
-    }
-
     @PostMapping("/addProduct")
     public void uploadProduct(
             @RequestParam String description,

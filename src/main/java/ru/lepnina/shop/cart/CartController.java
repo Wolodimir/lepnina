@@ -27,10 +27,10 @@ public class CartController {
     public void saveCart(@RequestParam String name,
                          @RequestParam String phoneNumber,
                          @RequestParam String email,
-                         @RequestParam boolean active,
                          @RequestParam String[] a
     ){
-        Client cli = new Client(name,phoneNumber,email,active);
+
+        Client cli = new Client(name,phoneNumber,email,true);
 
         cartService.saveCart(cli,a);
 
@@ -56,5 +56,10 @@ public class CartController {
     @GetMapping("/carts")
     public List<Cart> getAllCarts(){
         return cartService.getCarts();
+    }
+
+    @DeleteMapping("/carts/delete/{id}")
+    public void deleteOneCart(@PathVariable(value = "id") Long id){
+        cartService.deleteCartById(id);
     }
 }

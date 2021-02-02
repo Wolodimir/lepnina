@@ -16,18 +16,30 @@ public class Cart {
 
     private String cart;
 
-    public Cart(Client client, String cart) {
+    private Boolean active;
+
+    public Cart(Client client, String cart, Boolean active) {
         this.client = client;
         this.cart = cart;
+        this.active = active;
     }
 
-    public Cart(Long id, Client client, String cart) {
+    public Cart(Long id, Client client, String cart, Boolean active) {
         this.id = id;
         this.client = client;
         this.cart = cart;
+        this.active = active;
     }
 
     public Cart() {
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
     }
 
     public Long getId() {

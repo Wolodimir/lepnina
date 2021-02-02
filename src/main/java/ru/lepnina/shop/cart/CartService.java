@@ -30,7 +30,7 @@ public class CartService {
             a += (cart[i] + ",");
         }
 
-        Cart cart1 = new Cart(client, a);
+        Cart cart1 = new Cart(client, a, true);
         clientService.addNewClient(client);
         cartRepo.save(cart1);
     }
@@ -57,5 +57,9 @@ public class CartService {
             id +=chCart[i];
         }
         return productList;
+    }
+
+    public void deleteCartById(Long id) {
+        cartRepo.deleteById(id);
     }
 }
