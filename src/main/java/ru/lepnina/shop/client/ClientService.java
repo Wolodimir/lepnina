@@ -2,6 +2,7 @@ package ru.lepnina.shop.client;
 
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,13 +27,20 @@ public class ClientService {
         return clientRepo.findByActiveEquals(true);
     }
 
+    public void saveOffClient(Client client){
+        clientRepo.save(client);
+    }
+
     public void addNewClient(Client client){
         Optional<Client> clientOptional = clientRepo.findByPhoneNumber(client.getPhoneNumber());
         if(clientOptional.isPresent()){
-            //TODO add this user to top of the LIST
-            //TODO add for this client again ACTIVE
-            throw new IllegalStateException("User exists");
+            ArrayList<Client> c = new ArrayList<>();
+            clientOptional.ifPresent(c::add);
+            Client client1 = c.get(c.size()-1);
+            client1.setActive(true);
+            clientRepo.save(client1);
+        }else {
+            clientRepo.save(client);
         }
-        clientRepo.save(client);
     }
 }

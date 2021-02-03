@@ -23,8 +23,11 @@ public class CartService {
         this.clientService = clientService;
     }
 
+    public void saveCart(Cart cart){
+        cartRepo.save(cart);
+    }
 
-    public void saveCart(Client client, String[] cart){
+    public void makeCart(Client client, String[] cart){
         String a = "";
         for (int i = 0; i < cart.length; i++) {
             a += (cart[i] + ",");
@@ -33,6 +36,14 @@ public class CartService {
         Cart cart1 = new Cart(client, a, true);
         clientService.addNewClient(client);
         cartRepo.save(cart1);
+    }
+
+    public List<Cart> getActiveCarts(){
+        return cartRepo.findByActiveEquals(true);
+    }
+
+    public List<Cart> getNotActiveCarts(){
+        return cartRepo.findByActiveEquals(false);
     }
 
     public Cart getCartById(Long cart_id){
@@ -54,7 +65,7 @@ public class CartService {
                 id = "";
                 continue;
             }
-            id +=chCart[i];
+            id += chCart[i];
         }
         return productList;
     }

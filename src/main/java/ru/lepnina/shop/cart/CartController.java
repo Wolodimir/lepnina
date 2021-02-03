@@ -3,6 +3,7 @@ package ru.lepnina.shop.cart;
 import org.springframework.web.bind.annotation.*;
 import ru.lepnina.shop.client.Client;
 import ru.lepnina.shop.client.ClientService;
+import ru.lepnina.shop.product.Product;
 import ru.lepnina.shop.product.ProductService;
 
 import java.util.List;
@@ -27,38 +28,16 @@ public class CartController {
     public void saveCart(@RequestParam String name,
                          @RequestParam String phoneNumber,
                          @RequestParam String email,
-                         @RequestParam String[] a
+                         @RequestParam String[] products
     ){
 
         Client cli = new Client(name,phoneNumber,email,true);
 
-        cartService.saveCart(cli,a);
+        cartService.makeCart(cli,products);
 
-        /*List<Product> productList = new ArrayList<>();
-        Optional<Product> productOptional;
-
-        char[] some = bigCart.toCharArray();
-        String id = "";
-        for (int i = 0; i < some.length; i++) {
-            if (some[i] == ','){
-                Product product = productService.getProduct(Long.parseLong(id)).orElse(new Product());
-                productList.add(product);
-                id = "";
-                continue;
-            }
-            id += some[i];
-        }*/
-
-       /* Client client = new Client(name, phoneNumber, email, active);
-        clientService.addNewClient(client);*/
     }
 
-    @GetMapping("/carts")
-    public List<Cart> getAllCarts(){
-        return cartService.getCarts();
-    }
-
-    @DeleteMapping("/carts/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteOneCart(@PathVariable(value = "id") Long id){
         cartService.deleteCartById(id);
     }

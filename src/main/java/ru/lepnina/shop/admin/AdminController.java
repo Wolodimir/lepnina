@@ -2,6 +2,8 @@ package ru.lepnina.shop.admin;
 
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import ru.lepnina.shop.cart.Cart;
+import ru.lepnina.shop.cart.CartService;
 import ru.lepnina.shop.client.Client;
 import ru.lepnina.shop.client.ClientService;
 import ru.lepnina.shop.product.Product;
@@ -17,10 +19,12 @@ public class AdminController {
 
     private final ClientService clientService;
     private final ProductService productService;
+    private final CartService cartService;
 
-    public AdminController(ClientService clientService, ProductService productService) {
+    public AdminController(ClientService clientService, ProductService productService, CartService cartService) {
         this.clientService = clientService;
         this.productService = productService;
+        this.cartService = cartService;
     }
 
     /*
@@ -32,14 +36,16 @@ public class AdminController {
         return clientService.getClients();
     }
 
-    @PostMapping("/addNewClient")
-    public void addNewClient(@RequestBody Client client){
-        clientService.addNewClient(client);
-    }
-
     @GetMapping("/activeClients")
     public List<Client> activeClients(){
         return clientService.getActiveClients();
+    }
+
+    @PostMapping("/activeClients/{id}")
+    public void offClient(@PathVariable(value = "id") Long id){
+        Client client = clientService.getOneClient(id);
+        client.setActive(false);
+        clientService.saveOffClient(client);
     }
 
     /*
@@ -63,7 +69,33 @@ public class AdminController {
     }
 
     /*
-    *
+    *Cart control section
     * */
+
+    @GetMapping("/activeCarts")
+    public List<Cart> activeCarts(){
+        return cartService.getActiveCarts();
+    }
+    @GetMapping("/offCarts")
+    public List<Cart> offCarts(){
+        return cartService.getNotActiveCarts();
+    }
+
+    @PostMapping("/offCart/{id}")
+    public void offCart(@PathVariable(value = "id")Long id){
+        Cart cart = cartService.getCartById(id);
+        Client client = cart.getClient();
+
+        client.setActive(false);
+        cart.setActive(false);
+
+        cart.setClient(client);
+        cartService.saveCart(cart);
+    }
+
+    @GetMapping("/carts/{id}")
+    public List<Product> getProductsInCart(@PathVariable(value = "id") Long id){
+        return cartService.getProductInCart(cartService.getCartById(id).getCart());
+    }
 
 }
