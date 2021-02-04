@@ -27,11 +27,19 @@ public class ClientService {
         return clientRepo.findByActiveEquals(true);
     }
 
-    public void saveOffClient(Client client){
+    public void saveClient(Client client){
         clientRepo.save(client);
     }
 
-    public void addNewClient(Client client){
+    public Client findClientByNumber(String phoneNumber){
+        Optional<Client> clientOptional = clientRepo.findByPhoneNumber(phoneNumber);
+        /*ArrayList<Client> c = new ArrayList<>();
+            clientOptional.ifPresent(c::add);
+            return c.get(c.size() - 1);*/
+        return clientOptional.orElseGet(Client::new);
+    }
+
+    /*    public void addNewClient(Client client){
         Optional<Client> clientOptional = clientRepo.findByPhoneNumber(client.getPhoneNumber());
         if(clientOptional.isPresent()){
             ArrayList<Client> c = new ArrayList<>();
@@ -40,7 +48,8 @@ public class ClientService {
             client1.setActive(true);
             clientRepo.save(client1);
         }else {
+            client.setActive(true);
             clientRepo.save(client);
         }
-    }
+    }*/
 }

@@ -1,5 +1,7 @@
 package ru.lepnina.shop.client;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 
 @Entity
@@ -14,6 +16,12 @@ public class Client {
     private String email;
     private Boolean active;
 
+
+    public Client(String name, String phoneNumber, String email) {
+        this.name = name;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+    }
 
     public Client(String name, String phoneNumber, String email, Boolean active) {
         this.name = name;

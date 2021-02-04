@@ -27,15 +27,28 @@ public class CartService {
         cartRepo.save(cart);
     }
 
-    public void makeCart(Client client, String[] cart){
-        String a = "";
+    public String makeCart(String name, String phoneNumber, String email, String[] cart){
+        String cartString = "";
         for (int i = 0; i < cart.length; i++) {
-            a += (cart[i] + ",");
+            cartString += (cart[i] + ",");
         }
-
-        Cart cart1 = new Cart(client, a, true);
-        clientService.addNewClient(client);
+        if(clientService.findClientByNumber(phoneNumber).getPhoneNumber() == null){
+            Client client = new Client(name, phoneNumber, email, true);
+            clientService.saveClient(client);
+            Cart cart1 = new Cart(client, cartString,true);
+            cartRepo.save(cart1);
+            return "Client exists";
+        }
+        Client client = clientService.findClientByNumber(phoneNumber);
+        client.setActive(true);
+        clientService.saveClient(client);
+        Cart cart1 = new Cart(client,cartString,true);
         cartRepo.save(cart1);
+        return "Saved";
+       /* Client client = new Client(name, phoneNumber, email,true);
+        clientService.addNewClient(client);
+        Cart cart1 = new Cart(client, a, true);
+        cartRepo.save(cart1);*/
     }
 
     public List<Cart> getActiveCarts(){
@@ -49,6 +62,7 @@ public class CartService {
     public Cart getCartById(Long cart_id){
         return cartRepo.findById(cart_id).orElse(new Cart());
     }
+
     public List<Cart> getCarts(){
         return cartRepo.findAll();
     }
@@ -58,14 +72,14 @@ public class CartService {
         Optional<Product> productOptional;
         char[] chCart = cart.toCharArray();
         String id = "";
-        for (int i = 0; i < chCart.length; i++) {
-            if(chCart[i] == ','){
+        for (char c : chCart) {
+            if (c == ',') {
                 Product product = productService.getProduct(Long.parseLong(id)).orElse(new Product());
                 productList.add(product);
                 id = "";
                 continue;
             }
-            id += chCart[i];
+            id += c;
         }
         return productList;
     }

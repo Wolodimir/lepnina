@@ -6,6 +6,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clients")
+@CrossOrigin
 public class ClientController {
     private final ClientService clientService;
 
@@ -20,10 +21,10 @@ public class ClientController {
 
     @PostMapping("/addNewClient")
     public void addNewClient(@RequestBody Client client){
-        clientService.addNewClient(client);
+        //clientService.addNewClient(client);
     }
 
-   @GetMapping("/activeClients")
+    @GetMapping("/activeClients")
     public List<Client> activeClients(){
         return clientService.getActiveClients();
     }

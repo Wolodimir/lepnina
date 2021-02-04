@@ -1,5 +1,6 @@
 package ru.lepnina.shop.cart;
 
+import org.hibernate.annotations.Cascade;
 import ru.lepnina.shop.client.Client;
 import javax.persistence.*;
 

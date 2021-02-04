@@ -45,7 +45,7 @@ public class AdminController {
     public void offClient(@PathVariable(value = "id") Long id){
         Client client = clientService.getOneClient(id);
         client.setActive(false);
-        clientService.saveOffClient(client);
+        clientService.saveClient(client);
     }
 
     /*
@@ -76,6 +76,7 @@ public class AdminController {
     public List<Cart> activeCarts(){
         return cartService.getActiveCarts();
     }
+
     @GetMapping("/offCarts")
     public List<Cart> offCarts(){
         return cartService.getNotActiveCarts();
@@ -96,6 +97,11 @@ public class AdminController {
     @GetMapping("/carts/{id}")
     public List<Product> getProductsInCart(@PathVariable(value = "id") Long id){
         return cartService.getProductInCart(cartService.getCartById(id).getCart());
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteOneCart(@PathVariable(value = "id") Long id){
+        cartService.deleteCartById(id);
     }
 
 }
