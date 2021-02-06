@@ -1,6 +1,7 @@
 package ru.lepnina.shop.client;
 
 import org.springframework.stereotype.Service;
+import ru.lepnina.shop.cart.CartRepo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,9 +11,11 @@ import java.util.Optional;
 public class ClientService {
 
     private final ClientRepo clientRepo;
+    private final CartRepo cartRepo;
 
-    public ClientService(ClientRepo clientRepo) {
+    public ClientService(ClientRepo clientRepo, CartRepo cartRepo) {
         this.clientRepo = clientRepo;
+        this.cartRepo = cartRepo;
     }
 
     public List<Client> getClients(){
@@ -31,25 +34,24 @@ public class ClientService {
         clientRepo.save(client);
     }
 
+    public void addNewClient(Client client){
+        if(clientRepo.findByPhoneNumber(client.getPhoneNumber()).isPresent()){
+            Client clientFromDB = clientRepo.findByPhoneNumber(client.getPhoneNumber()).get();
+            clientFromDB.setActive(true);
+            clientRepo.save(clientFromDB);
+        }else {
+            clientRepo.save(client);
+        }
+    }
+
     public Client findClientByNumber(String phoneNumber){
         Optional<Client> clientOptional = clientRepo.findByPhoneNumber(phoneNumber);
-        /*ArrayList<Client> c = new ArrayList<>();
-            clientOptional.ifPresent(c::add);
-            return c.get(c.size() - 1);*/
         return clientOptional.orElseGet(Client::new);
     }
 
-    /*    public void addNewClient(Client client){
-        Optional<Client> clientOptional = clientRepo.findByPhoneNumber(client.getPhoneNumber());
-        if(clientOptional.isPresent()){
-            ArrayList<Client> c = new ArrayList<>();
-            clientOptional.ifPresent(c::add);
-            Client client1 = c.get(c.size()-1);
-            client1.setActive(true);
-            clientRepo.save(client1);
-        }else {
-            client.setActive(true);
-            clientRepo.save(client);
-        }
-    }*/
+    public void offClient(Long id){
+        Client client = clientRepo.findById(id).get();
+        client.setActive(!cartRepo.findCartByClientIdAndActiveEquals(client.getId(),true).isEmpty());
+        clientRepo.save(client);
+    }
 }

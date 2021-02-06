@@ -8,7 +8,7 @@ import java.util.Optional;
 
 @Repository
 public interface ClientRepo extends JpaRepository<Client, Long> {
-    //SELECT * FROM client
+
     Optional<Client> findByPhoneNumber(String PhoneNumber);
 
     List<Client> findByActiveEquals(Boolean active);

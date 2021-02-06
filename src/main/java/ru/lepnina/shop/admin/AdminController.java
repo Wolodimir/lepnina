@@ -29,7 +29,7 @@ public class AdminController {
 
     /*
     * CLIENT WORKS SECTION
-    * */
+    */
 
     @GetMapping("/allClients")
     public List<Client> allClients(){
@@ -43,14 +43,12 @@ public class AdminController {
 
     @PostMapping("/activeClients/{id}")
     public void offClient(@PathVariable(value = "id") Long id){
-        Client client = clientService.getOneClient(id);
-        client.setActive(false);
-        clientService.saveClient(client);
+        clientService.offClient(id);
     }
 
     /*
     * Product control section
-    * */
+    */
 
     @PostMapping("/addProduct")
     public void uploadProduct(
@@ -70,7 +68,7 @@ public class AdminController {
 
     /*
     *Cart control section
-    * */
+    */
 
     @GetMapping("/activeCarts")
     public List<Cart> activeCarts(){
@@ -84,14 +82,7 @@ public class AdminController {
 
     @PostMapping("/offCart/{id}")
     public void offCart(@PathVariable(value = "id")Long id){
-        Cart cart = cartService.getCartById(id);
-        Client client = cart.getClient();
-
-        client.setActive(false);
-        cart.setActive(false);
-
-        cart.setClient(client);
-        cartService.saveCart(cart);
+        cartService.offCart(id);
     }
 
     @GetMapping("/carts/{id}")

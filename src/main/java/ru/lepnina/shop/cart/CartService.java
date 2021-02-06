@@ -2,6 +2,7 @@ package ru.lepnina.shop.cart;
 
 import org.springframework.stereotype.Service;
 import ru.lepnina.shop.client.Client;
+import ru.lepnina.shop.client.ClientRepo;
 import ru.lepnina.shop.client.ClientService;
 import ru.lepnina.shop.product.Product;
 import ru.lepnina.shop.product.ProductService;
@@ -21,6 +22,18 @@ public class CartService {
         this.cartRepo = cartRepo;
         this.productService = productService;
         this.clientService = clientService;
+    }
+
+    public void offCart(Long id){
+        Cart cart = getCartById(id);
+        Client client = cart.getClient();
+
+        client.setActive(!cartRepo.findCartByClientIdAndActiveEquals(client.getId(),true).isEmpty());
+
+        cart.setActive(false);
+
+        cart.setClient(client);
+        saveCart(cart);
     }
 
     public void saveCart(Cart cart){
