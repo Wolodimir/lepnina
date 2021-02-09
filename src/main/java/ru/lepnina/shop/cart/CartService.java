@@ -58,10 +58,6 @@ public class CartService {
         Cart cart1 = new Cart(client,cartString,true);
         cartRepo.save(cart1);
         return "Saved";
-       /* Client client = new Client(name, phoneNumber, email,true);
-        clientService.addNewClient(client);
-        Cart cart1 = new Cart(client, a, true);
-        cartRepo.save(cart1);*/
     }
 
     public List<Cart> getActiveCarts(){

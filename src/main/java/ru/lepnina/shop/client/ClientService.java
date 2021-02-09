@@ -3,7 +3,6 @@ package ru.lepnina.shop.client;
 import org.springframework.stereotype.Service;
 import ru.lepnina.shop.cart.CartRepo;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

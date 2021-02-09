@@ -20,13 +20,22 @@ public class ProductService {
         this.amazonClient = amazonClient;
     }
 
-    public void saveProduct(String description,
-                            String name,
-                            Long price,
-                            MultipartFile imageFile,
-                            String category
+
+    public void saveProduct(String name,
+                            String description,
+                            Double height,
+                            Double length,
+                            Double width,
+                            String category,
+                            String subcategory,
+                            Double price,
+                            MultipartFile imageFile
                             ) throws IOException {
         Product p = new Product();
+        p.setHeight(height);
+        p.setLength(length);
+        p.setWidth(width);
+        p.setSubcategory(subcategory);
         p.setPrice(price);
         p.setName(name);
         p.setCategory(category);
