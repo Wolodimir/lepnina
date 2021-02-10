@@ -19,8 +19,9 @@ public class CartController {
     public void saveCart(@RequestParam String name,
                          @RequestParam String phoneNumber,
                          @RequestParam String email,
+                         @RequestParam String date,
                          @RequestParam String[] products
     ){
-        cartService.makeCart(name, phoneNumber, email, products);
+        cartService.makeCart(name, phoneNumber, email, date, products);
     }
 }

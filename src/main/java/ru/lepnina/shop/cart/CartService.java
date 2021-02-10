@@ -2,7 +2,6 @@ package ru.lepnina.shop.cart;
 
 import org.springframework.stereotype.Service;
 import ru.lepnina.shop.client.Client;
-import ru.lepnina.shop.client.ClientRepo;
 import ru.lepnina.shop.client.ClientService;
 import ru.lepnina.shop.product.Product;
 import ru.lepnina.shop.product.ProductService;
@@ -40,7 +39,7 @@ public class CartService {
         cartRepo.save(cart);
     }
 
-    public String makeCart(String name, String phoneNumber, String email, String[] cart){
+    public String makeCart(String name, String phoneNumber, String email, String date, String[] cart){
         String cartString = "";
         for (int i = 0; i < cart.length; i++) {
             cartString += (cart[i] + ",");
@@ -48,14 +47,14 @@ public class CartService {
         if(clientService.findClientByNumber(phoneNumber).getPhoneNumber() == null){
             Client client = new Client(name, phoneNumber, email, true);
             clientService.saveClient(client);
-            Cart cart1 = new Cart(client, cartString,true);
+            Cart cart1 = new Cart(client, cartString, date, true);
             cartRepo.save(cart1);
             return "Client exists";
         }
         Client client = clientService.findClientByNumber(phoneNumber);
         client.setActive(true);
         clientService.saveClient(client);
-        Cart cart1 = new Cart(client,cartString,true);
+        Cart cart1 = new Cart(client, cartString, date, true);
         cartRepo.save(cart1);
         return "Saved";
     }

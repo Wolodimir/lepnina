@@ -1,6 +1,5 @@
 package ru.lepnina.shop.cart;
 
-import org.hibernate.annotations.Cascade;
 import ru.lepnina.shop.client.Client;
 import javax.persistence.*;
 
@@ -17,18 +16,22 @@ public class Cart {
 
     private String cart;
 
+    private String date;
+
     private Boolean active;
 
-    public Cart(Client client, String cart, Boolean active) {
+    public Cart(Client client, String cart, String date, Boolean active) {
         this.client = client;
         this.cart = cart;
+        this.date = date;
         this.active = active;
     }
 
-    public Cart(Long id, Client client, String cart, Boolean active) {
+    public Cart(Long id, Client client, String cart, String date, Boolean active) {
         this.id = id;
         this.client = client;
         this.cart = cart;
+        this.date = date;
         this.active = active;
     }
 
@@ -65,5 +68,13 @@ public class Cart {
 
     public void setCart(String cart) {
         this.cart = cart;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
