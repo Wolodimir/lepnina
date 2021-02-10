@@ -25,13 +25,9 @@ public class CartService {
 
     public void offCart(Long id){
         Cart cart = getCartById(id);
-        Client client = cart.getClient();
-
-        client.setActive(!cartRepo.findCartByClientIdAndActiveEquals(client.getId(),true).isEmpty());
 
         cart.setActive(false);
 
-        cart.setClient(client);
         saveCart(cart);
     }
 
@@ -45,15 +41,13 @@ public class CartService {
             cartString += (cart[i] + ",");
         }
         if(clientService.findClientByNumber(phoneNumber).getPhoneNumber() == null){
-            Client client = new Client(name, phoneNumber, email, true);
+            Client client = new Client(name, phoneNumber, email, false);
             clientService.saveClient(client);
             Cart cart1 = new Cart(client, cartString, date, true);
             cartRepo.save(cart1);
             return "Client exists";
         }
         Client client = clientService.findClientByNumber(phoneNumber);
-        client.setActive(true);
-        clientService.saveClient(client);
         Cart cart1 = new Cart(client, cartString, date, true);
         cartRepo.save(cart1);
         return "Saved";

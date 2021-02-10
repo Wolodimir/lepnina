@@ -1,7 +1,5 @@
 package ru.lepnina.shop.client;
 
-import org.hibernate.annotations.Cascade;
-
 import javax.persistence.*;
 
 @Entity

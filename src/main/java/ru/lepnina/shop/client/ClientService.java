@@ -50,7 +50,7 @@ public class ClientService {
 
     public void offClient(Long id){
         Client client = clientRepo.findById(id).get();
-        client.setActive(!cartRepo.findCartByClientIdAndActiveEquals(client.getId(),true).isEmpty());
+        client.setActive(false);
         clientRepo.save(client);
     }
 }
