@@ -13,27 +13,31 @@ public class Client {
     private String phoneNumber;
     private String email;
     private Boolean active;
+    private String date;
 
 
-    public Client(String name, String phoneNumber, String email) {
+    public Client(String name, String phoneNumber, String email, String date) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
+        this.date = date;
     }
 
-    public Client(String name, String phoneNumber, String email, Boolean active) {
+    public Client(String name, String phoneNumber, String email, Boolean active, String date) {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.active = active;
+        this.date = date;
     }
 
-    public Client(Long id, String name, String phoneNumber, String email, Boolean active) {
+    public Client(Long id, String name, String phoneNumber, String email, Boolean active, String date) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.active = active;
+        this.date = date;
     }
 
     public Client() {
@@ -77,5 +81,13 @@ public class Client {
 
     public void setActive(Boolean active) {
         this.active = active;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

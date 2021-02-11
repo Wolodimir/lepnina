@@ -41,7 +41,7 @@ public class CartService {
             cartString += (cart[i] + ",");
         }
         if(clientService.findClientByNumber(phoneNumber).getPhoneNumber() == null){
-            Client client = new Client(name, phoneNumber, email, false);
+            Client client = new Client(name, phoneNumber, email, false, date);
             clientService.saveClient(client);
             Cart cart1 = new Cart(client, cartString, date, true);
             cartRepo.save(cart1);
