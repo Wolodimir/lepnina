@@ -41,7 +41,7 @@ public class AdminController {
         return clientService.getActiveClients();
     }
 
-    @PostMapping("/activeClients/{id}")
+    @DeleteMapping ("/activeClients/{id}")
     public void offClient(@PathVariable(value = "id") Long id){
         clientService.offClient(id);
     }
@@ -91,7 +91,7 @@ public class AdminController {
         return cartService.getNotActiveCarts();
     }
 
-    @PostMapping("/offCart/{id}")
+    @DeleteMapping ("/offCart/{id}")
     public void offCart(@PathVariable(value = "id")Long id){
         cartService.offCart(id);
     }
