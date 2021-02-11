@@ -34,13 +34,7 @@ public class ClientService {
     }
 
     public void addNewClient(Client client){
-        if(clientRepo.findByPhoneNumber(client.getPhoneNumber()).isPresent()){
-            Client clientFromDB = clientRepo.findByPhoneNumber(client.getPhoneNumber()).get();
-            clientFromDB.setActive(true);
-            clientRepo.save(clientFromDB);
-        }else {
-            clientRepo.save(client);
-        }
+        clientRepo.save(client);
     }
 
     public Client findClientByNumber(String phoneNumber){

@@ -40,17 +40,11 @@ public class CartService {
         for (int i = 0; i < cart.length; i++) {
             cartString += (cart[i] + ",");
         }
-        if(clientService.findClientByNumber(phoneNumber).getPhoneNumber() == null){
-            Client client = new Client(name, phoneNumber, email, false, date);
-            clientService.saveClient(client);
-            Cart cart1 = new Cart(client, cartString, date, true);
-            cartRepo.save(cart1);
-            return "Client exists";
-        }
-        Client client = clientService.findClientByNumber(phoneNumber);
+        Client client = new Client(name, phoneNumber, email, false, date);
+        clientService.saveClient(client);
         Cart cart1 = new Cart(client, cartString, date, true);
         cartRepo.save(cart1);
-        return "Saved";
+        return "Successfully saved";
     }
 
     public List<Cart> getActiveCarts(){
