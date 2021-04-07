@@ -51,10 +51,7 @@ public class AmazonClient {
             fileUrl = endpointUrl + "/" + bucketName + "/" + fileName;
             uploadFileTos3bucket(fileName, file);
             file.delete();
-        } /*catch (Exception e) {
-			e.printStackTrace();
-		}*/
-        catch (AmazonServiceException ase) {
+        } catch (AmazonServiceException ase) {
             logger.info("Caught an AmazonServiceException from GET requests, rejected reasons:");
             logger.info("Error Message:    " + ase.getMessage());
             logger.info("HTTP Status Code: " + ase.getStatusCode());
@@ -71,7 +68,6 @@ public class AmazonClient {
 
         }
         return fileUrl;
-
     }
 
     public String deleteFileFromS3Bucket(String fileUrl) {
